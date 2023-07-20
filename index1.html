@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Employee Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 40px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      border: 1px solid #ccc;
+      padding: 20px;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="tel"],
+    textarea {
+      width: 100%;
+      padding: 8px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    button[type="submit"] {
+      background-color: blue;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h2>Employee Login</h2>
+  <div class="container">
+    <form id="lunchForm">
+      <label for="username">Username:</label>
+      <input type="text" id="username" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" required>
+
+      <label for="email">Email ID:</label>
+      <input type="email" id="email" required>
+
+      <label for="contact">Contact Number:</label>
+      <input type="tel" id="contact" required>
+
+      <label for="question">Any Questions:</label>
+      <textarea id="question" required></textarea>
+
+      <label for="time">Time (24-hour format):</label>
+      <input type="text" id="time" required>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    document.getElementById('lunchForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Get user inputs
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const email = document.getElementById('email').value;
+      const contact = document.getElementById('contact').value;
+      const question = document.getElementById('question').value;
+      const time = parseInt(document.getElementById('time').value);
+
+      // Validate time input
+      if (isNaN(time) || time < 0 || time >= 24) {
+        alert('Please enter a valid time in 24-hour format (0-23).');
+        return;
+      }
+
+      // Calculate lunch time based on the given condition
+      let lunchTime;
+      if (time === 9) {
+        lunchTime = '1:00 PM to 2:00 PM';
+      } else if (time === 10) {
+        lunchTime = '2:00 PM to 3:00 PM';
+      } else {
+        lunchTime = 'Not applicable';
+      }
+
+      // Display the result
+      const resultDiv = document.getElementById('result');
+      resultDiv.textContent = `${username}, your lunchtime is ${lunchTime}.`;
+      
+    });
+  </script>
+</body>
+</html>
